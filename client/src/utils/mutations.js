@@ -23,13 +23,20 @@ export const ADD_USER = gql`
     }
   }
 `;
+
 export const SAVE_BOOK = gql`
-  mutation saveBook() {
+  mutation saveBook(authors: [String]
+    description: String!
+    title: String!
+    bookId: ID!
+    image: String
+    link: String
+  ): User) {
     
   }
 `;
 export const REMOVE_BOOK = gql`
-  mutation removeBook() {
+  mutation removeBook(removeBook(bookId: ID!): User) {
     
   }
 `;
