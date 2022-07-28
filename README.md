@@ -66,4 +66,4 @@ You can view more of my projects at <https://github.com/crumwj22>.
 
 ## Screenshot
 
-<img src="../../assets/images/.png" alt=""/>
+<img src="../../client/images/book-search.png" alt=""/>
