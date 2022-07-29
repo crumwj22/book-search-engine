@@ -42,25 +42,28 @@ const resolvers = {
     saveBook: async (parent, { bookData }, context) => {
       // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
       if (context.user) {
-        return User.findOneAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $addToSet: { savedBooks: bookData } },
           { new: true, runValidators: true }
         );
+        return updatedUser;
       }
-
+      throw new AuthenticationError("You need to be logged in!");
       // If user attempts to execute this mutation and isn't logged in, throw an error
       // throw new AuthenticationError("You are not logged in!");
     },
     // Set up mutation so a logged in user can only remove their profile and no one else's
     removeBook: async (parent, { bookId }, context) => {
       if (context.user) {
-        return User.findOneAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $pull: { savedBooks: { bookId } } },
           { new: true }
         );
+        return updatedUser;
       }
+      throw new AuthenticationError("You need to be logged in!");
     },
   },
 };
